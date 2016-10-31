@@ -6,6 +6,8 @@ Download new versions from the Git repository https://github.com/OpaliaSystems/o
 
 === Packages
 
+* identifier: pattern for ID classes
+
 === Usage in other SBT projects
 
 Download this SBT project, change to the project directory and enter the following command:
