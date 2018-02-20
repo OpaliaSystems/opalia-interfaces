@@ -7,6 +7,7 @@ Download new versions from the Git repository https://github.com/OpaliaSystems/o
 === Packages
 
 * identifier: pattern for ID classes
+* soa: helpers for working with OSGi and guidelines for service-oriented architecture
 
 === Usage in other SBT projects
 
