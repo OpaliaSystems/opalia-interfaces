@@ -6,6 +6,7 @@ Download new versions from the Git repository https://github.com/OpaliaSystems/o
 
 === Packages
 
+* database: pattern for generic database access
 * identifier: pattern for ID classes
 * json: JSON AST for communication between OSGi services
 * soa: helpers for working with OSGi and guidelines for service-oriented architecture
