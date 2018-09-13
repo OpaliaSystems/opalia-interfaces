@@ -9,7 +9,7 @@ homepage := Some(url("https://github.com/OpaliaSystems/opalia-interfaces"))
 
 version := "0.1.0-SNAPSHOT"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.4"
 
 libraryDependencies ++= Seq(
   "org.osgi" % "org.osgi.core" % "6.0.0" % "provided",
