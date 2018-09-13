@@ -9,6 +9,7 @@ Download new versions from the Git repository https://github.com/OpaliaSystems/o
 * database: pattern for generic database access
 * identifier: pattern for ID classes
 * json: JSON AST for communication between OSGi services
+* rendering: pattern for rendering objects to strings or byte sequences
 * soa: helpers for working with OSGi and guidelines for service-oriented architecture
 
 === Usage in other SBT projects
