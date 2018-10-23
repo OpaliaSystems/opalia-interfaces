@@ -5,5 +5,5 @@ import scala.util.Try
 
 trait FieldWriter[T] {
 
-  def apply(parameter: String, value: T): Try[Any]
+  def apply(key: String, value: T): Try[Any]
 }

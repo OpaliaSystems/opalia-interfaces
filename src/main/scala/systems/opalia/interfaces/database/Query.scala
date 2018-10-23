@@ -1,14 +1,16 @@
 package systems.opalia.interfaces.database
 
+import scala.reflect.ClassTag
 
-final class Query private(clause: String, parameter: Map[String, Any])
+
+final class Query private(clause: String, parameters: Map[String, Any])
                          (implicit executor: Executor) {
 
-  def on[T](parameter: String, value: T)(implicit writer: FieldWriter[T]): Query =
-    new Query(this.clause, this.parameter + (parameter -> writer(parameter, value).get))
+  def on[T](key: String, value: T)(implicit writer: FieldWriter[T]): Query =
+    new Query(clause, parameters + (key -> writer(key, value).get))
 
-  def execute(): Table =
-    executor.execute(clause, parameter)
+  def execute[R <: Result : ClassTag](): R =
+    executor.execute[R](clause, parameters)
 }
 
 object Query {
