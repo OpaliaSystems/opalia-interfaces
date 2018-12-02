@@ -5,21 +5,21 @@ import scala.concurrent.{Future, Promise}
 import scala.util.Try
 
 
-trait Terminatable {
+trait Terminatable[T] {
 
-  private val promise = Promise[Unit]()
+  private val promise = Promise[T]()
   private val down: AtomicBoolean = new AtomicBoolean(false)
 
   def completelyUp: Boolean =
     true
 
-  def completelyDown: Boolean =
+  final def completelyDown: Boolean =
     promise.isCompleted
 
-  def awaitDown(): Future[Unit] =
+  final def awaitDown(): Future[T] =
     promise.future
 
-  def shutdown(): Boolean = {
+  final def shutdown(): Boolean = {
 
     if (!completelyUp)
       false
@@ -32,5 +32,5 @@ trait Terminatable {
     }
   }
 
-  protected def shutdownTask()
+  protected def shutdownTask(): T
 }

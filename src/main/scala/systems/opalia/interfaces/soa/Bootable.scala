@@ -5,19 +5,19 @@ import scala.concurrent.{Future, Promise}
 import scala.util.Try
 
 
-trait Bootable
-  extends Terminatable {
+trait Bootable[T, U]
+  extends Terminatable[U] {
 
-  private val promise = Promise[Unit]()
+  private val promise = Promise[T]()
   private val up: AtomicBoolean = new AtomicBoolean(false)
 
-  override def completelyUp: Boolean =
+  override final def completelyUp: Boolean =
     promise.isCompleted
 
-  def awaitUp(): Future[Unit] =
+  final def awaitUp(): Future[T] =
     promise.future
 
-  def setup(): Boolean = {
+  final def setup(): Boolean = {
 
     if (up.getAndSet(true))
       false
@@ -28,5 +28,5 @@ trait Bootable
     }
   }
 
-  protected def setupTask()
+  protected def setupTask(): T
 }
