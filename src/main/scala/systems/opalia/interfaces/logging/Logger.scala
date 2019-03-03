@@ -79,7 +79,25 @@ abstract class Logger {
       internal(logLevel, message, throwable)
   }
 
-  protected def internal(logLevel: LogLevel.Value, message: String): Unit
+  def subLogger(logLevel: LogLevel.Value): SubLogger = {
 
-  protected def internal(logLevel: LogLevel.Value, message: String, throwable: Throwable): Unit
+    new SubLogger {
+
+      val name: String = Logger.this.name
+
+      def apply(message: => String): Unit = {
+
+        if (logLevel <= Logger.this.logLevel)
+          Logger.this.internal(logLevel, message)
+      }
+
+      def apply(message: => String, throwable: Throwable): Unit = {
+
+        if (logLevel <= Logger.this.logLevel)
+          Logger.this.internal(logLevel, message, throwable)
+      }
+    }
+  }
+
+  protected def internal(logLevel: LogLevel.Value, message: String, throwable: Throwable = null): Unit
 }
