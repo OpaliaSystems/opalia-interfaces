@@ -1,6 +1,7 @@
 package systems.opalia.interfaces.rendering
 
 import java.nio.ByteOrder
+import java.nio.charset.Charset
 
 
 sealed trait Renderable
@@ -18,8 +19,8 @@ trait StringRenderable
 trait ByteRenderable
   extends Renderable {
 
-  final def toBytes(implicit charset: String = Renderer.defaultCharset,
-                    byteOrder: ByteOrder = Renderer.defaultByteOrder): Vector[Byte] =
+  final def toBytes(implicit charset: Charset = Renderer.appDefaultCharset,
+                    byteOrder: ByteOrder = Renderer.appDefaultByteOrder): Vector[Byte] =
     renderBytes(new ByteRenderer(charset, byteOrder)).result()
 
   def renderBytes(renderer: ByteRenderer): ByteRenderer

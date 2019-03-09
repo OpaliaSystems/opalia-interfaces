@@ -1,5 +1,6 @@
 package systems.opalia.interfaces.rendering
 
+import java.nio.charset.Charset
 import java.nio.{ByteBuffer, ByteOrder}
 import java.util.Locale
 import scala.collection.mutable
@@ -104,8 +105,10 @@ sealed trait Renderer[R <: Renderer[_, _, _, _], S <: Renderable, U, T]
 
 object Renderer {
 
-  val defaultCharset: String = "UTF-8"
-  val defaultByteOrder: ByteOrder = ByteOrder.BIG_ENDIAN
+  val appDefaultCharset: Charset = Charset.forName("UTF-8")
+  val osDefaultCharset: Charset = Charset.defaultCharset()
+  val appDefaultByteOrder: ByteOrder = ByteOrder.BIG_ENDIAN
+  val osDefaultByteOrder: ByteOrder = ByteOrder.nativeOrder()
 }
 
 final class StringRenderer()
@@ -230,8 +233,8 @@ final class StringRenderer()
   }
 }
 
-final class ByteRenderer(val charset: String = Renderer.defaultCharset,
-                         val byteOrder: ByteOrder = Renderer.defaultByteOrder)
+final class ByteRenderer(val charset: Charset = Renderer.appDefaultCharset,
+                         val byteOrder: ByteOrder = Renderer.appDefaultByteOrder)
   extends Renderer[ByteRenderer, ByteRenderable, Vector[Byte], Byte] {
 
   private val builder = mutable.ArrayBuffer[Byte]()
