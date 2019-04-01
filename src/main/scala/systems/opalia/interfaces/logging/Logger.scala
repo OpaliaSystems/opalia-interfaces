@@ -5,7 +5,7 @@ abstract class Logger {
 
   val name: String
 
-  val logLevel: LogLevel.Value
+  val logLevel: LogLevel
 
   def debugEnabled: Boolean =
     logLevel >= LogLevel.DEBUG
@@ -67,19 +67,19 @@ abstract class Logger {
       internal(LogLevel.ERROR, message, throwable)
   }
 
-  def log(logLevel: LogLevel.Value, message: => String): Unit = {
+  def log(logLevel: LogLevel, message: => String): Unit = {
 
     if (logLevel <= this.logLevel)
       internal(logLevel, message)
   }
 
-  def log(logLevel: LogLevel.Value, message: => String, throwable: Throwable): Unit = {
+  def log(logLevel: LogLevel, message: => String, throwable: Throwable): Unit = {
 
     if (logLevel <= this.logLevel)
       internal(logLevel, message, throwable)
   }
 
-  def subLogger(logLevel: LogLevel.Value): SubLogger = {
+  def subLogger(logLevel: LogLevel): SubLogger = {
 
     new SubLogger {
 
@@ -99,5 +99,5 @@ abstract class Logger {
     }
   }
 
-  protected def internal(logLevel: LogLevel.Value, message: String, throwable: Throwable = null): Unit
+  protected def internal(logLevel: LogLevel, message: String, throwable: Throwable = null): Unit
 }
