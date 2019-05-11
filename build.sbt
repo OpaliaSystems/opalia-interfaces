@@ -1,9 +1,13 @@
 
 organizationName := "Opalia Systems"
 
+organizationHomepage := Some(url("https://opalia.systems"))
+
 organization := "systems.opalia"
 
 name := "interfaces"
+
+description := "The project contains patterns and utilities used in Opalia stack."
 
 homepage := Some(url("https://github.com/OpaliaSystems/opalia-interfaces"))
 
