@@ -6,7 +6,7 @@ import java.util.Locale
 import scala.collection.mutable
 
 
-sealed trait Renderer[R <: Renderer[_, _, _, _], S <: Renderable, U, T]
+sealed trait Renderer[R <: Renderer[R, S, U, T], S <: Renderable, U, T]
   extends IndexedSeq[T]
     with mutable.ReusableBuilder[T, U] {
 
@@ -73,7 +73,13 @@ sealed trait Renderer[R <: Renderer[_, _, _, _], S <: Renderable, U, T]
 
   def append(renderable: S): this.type
 
+  def append(charSequence: CharSequence): this.type
+
+  def append(iterable: Iterable[Char]): this.type
+
   def appendCodePoint(value: Int): this.type
+
+  def appendCodePoints(iterable: Iterable[Int]): this.type
 
   def appendAny(value: Any): this.type =
     append(String.valueOf(value))
@@ -213,7 +219,7 @@ final class StringRenderer()
 
   def append(renderer: StringRenderer): this.type = {
 
-    renderer.foreach(x => builder.append(x))
+    builder.append(renderer)
 
     this
   }
@@ -225,9 +231,30 @@ final class StringRenderer()
     this
   }
 
+  def append(charSequence: CharSequence): this.type = {
+
+    builder.append(charSequence)
+
+    this
+  }
+
+  def append(iterable: Iterable[Char]): this.type = {
+
+    builder.append(iterable.toArray)
+
+    this
+  }
+
   def appendCodePoint(value: Int): this.type = {
 
     builder.appendCodePoint(value)
+
+    this
+  }
+
+  def appendCodePoints(iterable: Iterable[Int]): this.type = {
+
+    iterable.foreach(builder.appendCodePoint)
 
     this
   }
@@ -241,7 +268,7 @@ final class ByteRenderer(val charset: Charset = Renderer.appDefaultCharset,
   private val buffer = ByteBuffer.allocate(8).order(byteOrder)
 
   def newEmpty: ByteRenderer =
-    new ByteRenderer(charset)
+    new ByteRenderer(charset, byteOrder)
 
   def apply(index: Int): Byte =
     builder.apply(index)
@@ -355,9 +382,30 @@ final class ByteRenderer(val charset: Charset = Renderer.appDefaultCharset,
     this
   }
 
+  def append(charSequence: CharSequence): this.type = {
+
+    builder.appendAll(charSequence.toString.getBytes(charset))
+
+    this
+  }
+
+  def append(iterable: Iterable[Char]): this.type = {
+
+    builder.appendAll((new String(iterable.toArray)).getBytes(charset))
+
+    this
+  }
+
   def appendCodePoint(value: Int): this.type = {
 
     builder.appendAll((new String(Array(value), 0, 1)).getBytes(charset))
+
+    this
+  }
+
+  def appendCodePoints(iterable: Iterable[Int]): this.type = {
+
+    builder.appendAll((new String(iterable.toArray, 0, iterable.size)).getBytes(charset))
 
     this
   }
