@@ -13,6 +13,9 @@ trait StringRenderable
   override final def toString: String =
     renderString(new StringRenderer()).result()
 
+  final def toByteString(implicit charset: Charset = Renderer.appDefaultCharset): Vector[Byte] =
+    renderString(new StringRenderer()).result().getBytes(charset).toVector
+
   def renderString(renderer: StringRenderer): StringRenderer
 }
 
