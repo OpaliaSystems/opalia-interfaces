@@ -13,6 +13,7 @@ Download new versions from the Git repository https://github.com/OpaliaSystems/o
 * rendering: pattern for rendering objects to strings or byte sequences
 * soa: helpers for working with OSGi and guidelines for service-oriented architecture
 * vfs: pattern to implement a virtual file system for non-modifiable files
+* worker: facade to hide various implementations of distributed computing solutions
 
 === Usage in other SBT projects
 
