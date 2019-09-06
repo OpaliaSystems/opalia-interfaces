@@ -12,6 +12,7 @@ Download new versions from the Git repository https://github.com/OpaliaSystems/o
 * logging: abstract logger with call-by-name message evaluation
 * rendering: pattern for rendering objects to strings or byte sequences
 * soa: helpers for working with OSGi and guidelines for service-oriented architecture
+* vfs: pattern to implement a virtual file system for non-modifiable files
 
 === Usage in other SBT projects
 
