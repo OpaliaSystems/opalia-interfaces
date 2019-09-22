@@ -11,6 +11,7 @@ Download new versions from the Git repository https://github.com/OpaliaSystems/o
 * json: JSON AST for communication between OSGi services
 * logging: abstract logger with call-by-name message evaluation
 * rendering: pattern for rendering objects to strings or byte sequences
+* scripting: an API for scripting based on ideas of GraalVM
 * soa: helpers for working with OSGi and guidelines for service-oriented architecture
 * vfs: pattern to implement a virtual file system for non-modifiable files
 * worker: facade to hide various implementations of distributed computing solutions
