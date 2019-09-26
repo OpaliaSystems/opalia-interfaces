@@ -11,7 +11,7 @@ description := "The project contains patterns and utilities used in Opalia stack
 
 homepage := Some(url("https://github.com/OpaliaSystems/opalia-interfaces"))
 
-version := "0.1.0-SNAPSHOT"
+version := "1.0.0"
 
 scalaVersion := "2.12.13"
 
