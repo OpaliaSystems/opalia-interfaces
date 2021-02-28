@@ -19,7 +19,7 @@ libraryDependencies ++= Seq(
   "org.scala-lang" % "scala-library" % scalaVersion.value,
   "org.scala-lang" % "scala-reflect" % scalaVersion.value,
   "org.scala-lang" % "scala-compiler" % scalaVersion.value,
-  "org.osgi" % "org.osgi.core" % "6.0.0" % "provided",
-  "com.typesafe" % "config" % "1.3.4",
-  "org.scalatest" %% "scalatest" % "3.0.7" % "test"
+  "org.osgi" % "osgi.core" % "8.0.0" % "provided",
+  "com.typesafe" % "config" % "1.4.1",
+  "org.scalatest" %% "scalatest" % "3.2.5" % "test"
 )
