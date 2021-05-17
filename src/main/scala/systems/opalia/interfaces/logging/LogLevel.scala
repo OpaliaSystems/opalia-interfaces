@@ -29,8 +29,11 @@ object LogLevel
   case object DEBUG
     extends LogLevel(4, "DEBUG")
 
+  case object TRACE
+    extends LogLevel(5, "TRACE")
+
   val values: Seq[LogLevel] =
-    OFF :: ERROR :: WARNING :: INFO :: DEBUG :: Nil
+    OFF :: ERROR :: WARNING :: INFO :: DEBUG :: TRACE :: Nil
 
   def compare(a: LogLevel, b: LogLevel): Int =
     a.compare(b)

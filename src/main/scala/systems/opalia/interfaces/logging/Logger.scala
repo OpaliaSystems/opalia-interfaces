@@ -7,6 +7,9 @@ abstract class Logger {
 
   val logLevel: LogLevel
 
+  def traceEnabled: Boolean =
+    logLevel >= LogLevel.TRACE
+
   def debugEnabled: Boolean =
     logLevel >= LogLevel.DEBUG
 
@@ -18,6 +21,18 @@ abstract class Logger {
 
   def errorEnabled: Boolean =
     logLevel >= LogLevel.ERROR
+
+  def trace(message: => String): Unit = {
+
+    if (traceEnabled)
+      internal(LogLevel.TRACE, message)
+  }
+
+  def trace(message: => String, throwable: Throwable): Unit = {
+
+    if (traceEnabled)
+      internal(LogLevel.TRACE, message, throwable)
+  }
 
   def debug(message: => String): Unit = {
 
